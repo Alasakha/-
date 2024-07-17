@@ -32,6 +32,7 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 		},
 		children: [
 			{
+				// 首页
 				path: '/home',
 				name: 'home',
 				component: () => import('/@/views/home/index.vue'),
@@ -47,6 +48,7 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 				},
 			},
 			{
+				// 个人中心
 				path: '/personal',
 				name: 'personals',
 				component: () => import('/@/views/system/personal/index.vue'),
@@ -66,6 +68,73 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
 ];
 
 export const demoRoutes:Array<RouteRecordRaw> = [
+
+	{
+		path: '/property',
+		name: 'property',
+		component:() =>import('/@/layout/routerView/parent.vue'),
+		meta: {
+			
+			title: '资产管理',
+			isLink: '',
+			isHide: false,
+			isKeepAlive: true,
+			isAffix: false,
+			isIframe: false,
+			roles: ['admin'],
+			icon: 'iconfont icon-diannao',
+		},
+		children:[
+			{
+				path: '/property/handle',
+				name: 'handle',
+				component:() =>import('/@/views/property/handle/index.vue'),
+				meta: {
+					title: '资金处理',
+					isLink: '',
+					isHide: false,
+					isKeepAlive: true,
+					isAffix: false,
+					isIframe: false,
+					roles: ['admin'],
+					icon: 'iconfont icon-diannao',
+				},
+			},
+				// 领用&退库
+				{
+					path: '/property/recpAreturn',
+					name: 'recpAreturn',
+					component:() =>import('/@/views/property/recpAreturn/index.vue'),
+					meta: {
+						title: '领用&退库',
+						isLink: '',
+						isHide: false,
+						isKeepAlive: true,
+						isAffix: false,
+						isIframe: false,
+						roles: ['admin'],
+						icon: 'iconfont icon-diannao',
+					},
+			    },
+				{
+					//借用&归还
+					path: '/property/loadAreturn',
+					name: 'Loan & return',
+					component:() =>import('/@/views/property/loadAreturn/index.vue'),
+					meta: {
+						title: '借用&归还',
+						isLink: '',
+						isHide: false,
+						isKeepAlive: true,
+						isAffix: false,
+						isIframe: false,
+						roles: ['admin'],
+						icon: 'iconfont icon-diannao',
+					},
+			    },
+		]
+	 },
+	
 	{
 		path: '/demo',
 		name: 'demo',
@@ -82,12 +151,14 @@ export const demoRoutes:Array<RouteRecordRaw> = [
 			icon: 'iconfont icon-diannao',
 		},
 		children:[
+			
 			{
 				path: '/demo/system',
 				name: 'system',
 				component: () => import('/@/layout/routerView/parent.vue'),
 				redirect: '/system/menu',
 				meta: {
+					// 系统设置
 					title: 'message.router.system',
 					isLink: '',
 					isHide: false,
@@ -98,7 +169,8 @@ export const demoRoutes:Array<RouteRecordRaw> = [
 					icon: 'iconfont icon-xitongshezhi',
 				},
 				children: [
-					{
+					{   
+						// 菜单管理
 						path: '/demo/system/menu',
 						name: 'systemMenu',
 						component: () => import('/@/views/system/menu/index.vue'),
@@ -114,6 +186,7 @@ export const demoRoutes:Array<RouteRecordRaw> = [
 						},
 					},
 					{
+						// 角色管理
 						path: '/demo/system/role',
 						name: 'systemRole',
 						component: () => import('/@/views/system/role/index.vue'),
@@ -129,6 +202,7 @@ export const demoRoutes:Array<RouteRecordRaw> = [
 						},
 					},
 					{
+						// 用户管理
 						path: '/demo/system/user',
 						name: 'systemUser',
 						component: () => import('/@/views/system/user/index.vue'),
@@ -144,6 +218,7 @@ export const demoRoutes:Array<RouteRecordRaw> = [
 						},
 					},
 					{
+						// 部门管理
 						path: '/demo/system/dept',
 						name: 'systemDept',
 						component: () => import('/@/views/system/dept/index.vue'),
@@ -160,7 +235,10 @@ export const demoRoutes:Array<RouteRecordRaw> = [
 					},
 				],
 			},
+
+
 			{
+				// 菜单嵌套
 				path: '/demo/menu',
 				name: 'menu',
 				component: () => import('/@/layout/routerView/parent.vue'),

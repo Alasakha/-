@@ -12,6 +12,13 @@ export function login(params: object){
 	});
 }
 
+
+export function GetPet(){
+	return request({
+		url:"/pet/{petId}",
+		method:"get"
+	})
+}
 /**
  * 获取验证码
  */
