@@ -13,7 +13,14 @@ import CleanFrom from './component/Cleanup.vue'
 import ReturnForm  from "./component/Return.vue";
 //新建数据表单引用
 import CreateForm from '../handle/create/create.vue'
+import axios from 'axios';
 
+
+const res = axios({
+    method: 'GET',
+    url: 'http://v.juhe.cn/toutiao/index'
+})
+console.log(res);
 
 
 let isShowIn = ref(false)
@@ -133,7 +140,8 @@ const closecreate = (val) =>{
 
 
     <!-- 新建选项 -->
-    <el-button type="primary" size="large" style="margin-left: 10px" text @click="dialogVisible= !dialogVisible ">
+    <el-button id="create" type="primary" size="large" style="margin-left: 10px;border: 1px solid #CDD0D6"
+     text @click="dialogVisible= !dialogVisible ">
       <el-icon><Plus /></el-icon>
        新建 </el-button>
     
@@ -226,5 +234,9 @@ const closecreate = (val) =>{
           background-color: white;
           margin-left: 10px;
         }
+    }
+    #create:hover{
+      background-color: #F2F3F5;
+         opacity: 0.5;
     }
 </style>

@@ -178,6 +178,24 @@ const tableData = [
   },
 ]
 </script>
-<style lang="scss">
-
+<style lang="scss" scoped>
+/* ---el-table滚动条公共样式--- */
+.el-scrollbar {
+  // 横向滚动条
+  .el-scrollbar__bar.is-horizontal .el-scrollbar__thumb {
+    opacity: 1; // 默认滚动条自带透明度
+    height: 8px; // 横向滑块的宽度
+    border-radius: 2px; // 圆角度数
+    background-color: rgba(136, 219, 255, 1); // 滑块背景色
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.15); // 滑块阴影
+  }
+  // 纵向滚动条
+  .el-scrollbar__bar.is-vertical .el-scrollbar__thumb {
+    opacity: 1;
+    width: 8px; // 纵向滑块的宽度
+    border-radius: 2px;
+    background-color: rgba(136, 219, 255, 1);
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.15);
+  }
+}
 </style>

@@ -5,9 +5,7 @@ import router from './router';
 import { directive } from '/@/utils/directive';
 import { i18n } from '/@/i18n/index';
 import other from '/@/utils/other';
-
 import ElementPlus from 'element-plus';
-
 import 'element-plus/dist/index.css';
 import '/@/theme/index.scss';
 import mitt from 'mitt';
@@ -17,7 +15,6 @@ import {useDict} from '/@/api/system/dict/data';
 import {getItems, setItems, getOptionValue, isEmpty} from '/@/api/items'
 // 分页组件
 import pagination from '/@/components/pagination/index.vue'
-
 // 大文件上传组件
 // @ts-ignore
 import uploader from 'vue-simple-uploader'
@@ -58,7 +55,6 @@ const globalProperties={
     mittBus: mitt(),
     i18n
 }
-
 
 //必须合并vue默认的变量，否则有问题
 app.config.globalProperties = Object.assign(
