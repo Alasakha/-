@@ -4,6 +4,8 @@ import { defineConfig, loadEnv, ConfigEnv } from 'vite';
 import vueSetupExtend from 'vite-plugin-vue-setup-extend-plus';
 import viteCompression from 'vite-plugin-compression';
 import { buildConfig } from './src/utils/build';
+import { UserConfigExport } from 'vite';
+import { viteMockServe } from 'vite-plugin-mock'
 
 const pathResolve = (dir: string) => {
 	return resolve(__dirname, '.', dir);
@@ -14,10 +16,13 @@ const alias: Record<string, string> = {
 	'vue-i18n': 'vue-i18n/dist/vue-i18n.cjs.js',
 };
 
-const viteConfig = defineConfig((mode: ConfigEnv) => {
+const viteConfig = defineConfig((mode: ConfigEnv  )=> {
 	const env = loadEnv(mode.mode, process.cwd());
 	return {
-		plugins: [vue(), vueSetupExtend(), viteCompression()],
+		plugins: [vue(), vueSetupExtend(), viteCompression(),viteMockServe({
+			mockPath:'mock',
+			loaclEnabled: mode === 'serve',
+		}),],
 		root: process.cwd(),
 		resolve: { alias },
 		base: mode.command === 'serve' ? './' : env.VITE_PUBLIC_PATH,
@@ -63,4 +68,6 @@ const viteConfig = defineConfig((mode: ConfigEnv) => {
 		},
 	};
 });
-export default viteConfig;
+
+
+	export default viteConfig;

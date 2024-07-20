@@ -1,5 +1,6 @@
 <script setup>
-import Form from './component/table.vue'
+// import Form from './component/table.vue'
+import Form from './component/index1.vue'
 import { ref } from 'vue';
 import ReceiveForm from '/@/views/property/handle/component/InfForm.vue';
 import CancelForm from './component/Cancle.vue'
@@ -13,14 +14,11 @@ import CleanFrom from './component/Cleanup.vue'
 import ReturnForm  from "./component/Return.vue";
 //新建数据表单引用
 import CreateForm from '../handle/create/create.vue'
+import { onBeforeMount } from 'vue';
+
 import axios from 'axios';
 
 
-const res = axios({
-    method: 'GET',
-    url: 'http://v.juhe.cn/toutiao/index'
-})
-console.log(res);
 
 
 let isShowIn = ref(false)

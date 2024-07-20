@@ -20,6 +20,19 @@ import pagination from '/@/components/pagination/index.vue'
 import uploader from 'vue-simple-uploader'
 import 'vue-simple-uploader/dist/style.css'
 
+// 测试代码：测试假的接口能否使用
+import axios from 'axios';
+// 登录接口
+axios({
+    url: '/api/user/login',
+    method: 'post',
+    data: {
+        username: 'admin',
+        password: '111111'
+    }
+})
+
+
 // 如果您正在使用CDN引入，请删除下面一行。
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 const app = createApp(App);
@@ -35,7 +48,7 @@ app.component('pagination', pagination)
 app.use(pinia)
     .use(uploader)
     .use(router)
-    .use(ElementPlus, { i18n: i18n.global.t })
+    .use(ElementPlus, { fi18n: i18n.global.t })
     .use(i18n)
     .use(VueGridLayout)
     .mount('#app');
