@@ -94,14 +94,7 @@ export default defineComponent({
 	},
 });
 
-import axios from 'axios';
-const baseUrl="https://dev.usemock.com/669b2779232f374e88229f4c/api"
-axios.get(`${baseUrl}/assets`)
-.then(({data}) =>	
-{
-	console.log(data)
-}
-)
+
 
 
 </script>
