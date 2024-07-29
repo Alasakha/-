@@ -2,17 +2,12 @@
 <div class="assethandle_search_box">
     <div class="span">
         <p>资产编码</p>
-        <el-input v-model="input" style="width: 240px; height: 40px;"  placeholder="Please input" />
-    </div>
-    <div class="span">
-        <p>资产编码</p>
-        <el-input v-model="input" style="width: 240px; height: 40px;"  placeholder="Please input" />
+        <el-input  v-model="assetcode" style="width: 240px; height: 40px;"  placeholder="Please input" />
     </div>
     <div class="span">
         <p>使用人员</p>
         <el-input v-model="input" style="width: 240px; height: 40px;"  placeholder="Please input" />
     </div>
-
     <div class="span">
         <p>所属部门</p>
         <el-select v-model="value" placeholder="Select" style="width: 240px">
@@ -61,8 +56,8 @@
 
 
     <div class="span">
-        <el-button type="primary" style="margin-left: 0;"><el-icon><Search /></el-icon>查询</el-button>
-        <el-button type="primary" style="margin-left: 30px;"><el-icon><Refresh /></el-icon>重置</el-button>
+        <el-button type="primary" style="margin-left: 0;" @click='updateFilter'><el-icon><Search /></el-icon>查询</el-button>
+        <el-button type="primary" style="margin-left: 30px;" @click="resetFilter"><el-icon><Refresh /></el-icon>重置</el-button>
     </div>
 
     <div class="span"></div>
@@ -73,6 +68,25 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useDataStore } from '/@/stores/asset';
+
+// 使用Pinia store
+const dataStore = useDataStore();
+
+const assetcode = ref(dataStore.filter.assetcode);
+
+function updateFilter() {
+  dataStore.setFilter({
+    assetcode: assetcode.value,
+  });
+}
+
+function resetFilter() {
+  dataStore.resetFilter();
+  // 同步搜索输入框的值
+  assetcode.value = ''
+}
+
 const input = ref('')
 
 const shortcuts = [
@@ -104,7 +118,7 @@ const shortcuts = [
     display: flex;
     flex-wrap: wrap;
     align-content:flex-start ;
-    justify-content: space-around;
+    justify-content: start;
     .span{
         width: 330px;
         height: 50px;

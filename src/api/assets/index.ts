@@ -7,7 +7,7 @@ const apiClient = axios.create({
   baseURL: API_BASE_URL,
   // 其他axios配置选项
   timeout: 1000,
-  headers: {'X-Custom-Header': 'foobar'}
+  headers: {'Content-Type':'application/json'}
 });
  
 // 封装具体的接口请求函数
