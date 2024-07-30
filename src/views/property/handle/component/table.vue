@@ -100,9 +100,9 @@ const disabled = ref(false)
 
 //查看功能
 const dialogStore = useDialogStore();
+
 function viewDetails(row :any) {
   console.log(row);
-  
   dialogStore.openDialog(row);
 }
 
@@ -141,5 +141,9 @@ let filteredItems = computed(() => dataStore.filteredItems);
   border-top: 1px solid #e0e0e0;
   flex-direction:column
 }
-
+.demo-pagination-block{
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
 </style>

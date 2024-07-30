@@ -9,7 +9,7 @@
 <script setup>
 import SearchContent from './component/Search.vue'
 import TableTitle from './component/table.vue'
-import DiaglogVue from './component/dialog.vue'
+import DiaglogVue from './component/Dialog/dialog.vue'
 </script>
 <style lang="scss" scoped>
 
@@ -19,10 +19,6 @@ import DiaglogVue from './component/dialog.vue'
       height: 30px;
       border-bottom: 1px black solid;
       display: flex;
-     
   }
-
-  
-
 
 </style>

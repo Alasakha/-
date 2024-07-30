@@ -54,7 +54,6 @@ export const useDataStore = defineStore('dataStore', {
         };
         console.log('Filter reset:', this.filter);
       },
-
   },
 
   getters: {
@@ -73,7 +72,6 @@ export const useDataStore = defineStore('dataStore', {
 });
 
 export const useDialogStore = defineStore('dialog', {
-
     state: () => ({
       isDialogVisible: false,
       selectedRow: null as any | null,
@@ -84,12 +82,16 @@ export const useDialogStore = defineStore('dialog', {
         this.selectedRow = row;
         this.currentView = 'details'; // 默认视图类型
         this.isDialogVisible = true;
+        console.log(this.isDialogVisible);
+        
       },
       switchView(view: 'details' | 'edit') {
         this.currentView = view;
       },
       closeDialog() {
         this.isDialogVisible = false;
+        console.log(this.isDialogVisible);
+        
       },
     },
   });
