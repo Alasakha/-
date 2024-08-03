@@ -29,7 +29,7 @@
     <el-table-column property="StorageLocation" label="存放地点" width="120"/>
     <el-table-column property="Purchasingdate" label="购买日期" width="120"/>
     <el-table-column property="UserDepartment" label="使用部门" width="120"/>
-    <el-table-column property="User" label="使用人员" width="120"/>
+    <el-table-column property="user" label="使用人员" width="120"/>
     <el-table-column property="StartTime" label="维护开始时间" width="120"/>
     <el-table-column property="CycleTime" label="维护周期" width="150"/>
     <el-table-column property="Supplier" label="供应商" width="150" />

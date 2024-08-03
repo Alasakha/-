@@ -6,16 +6,16 @@
     </div>
     <div class="span">
         <p>使用人员</p>
-        <el-input v-model="input" style="width: 240px; height: 40px;"  placeholder="Please input" />
+        <el-input v-model="user" style="width: 240px; height: 40px;"  placeholder="Please input" />
     </div>
     <div class="span">
         <p>所属部门</p>
-        <el-select v-model="value" placeholder="Select" style="width: 240px">
+        <el-select v-model="selectedValue" placeholder="Select" style="width: 240px">
             <el-option
-            v-for="item in options"
+            v-for="item in uniqueCategories"
             :key="item.value"
-            :label="item.label"
             :value="item.value"
+            :label="item.value"
              />
             </el-select>
     </div>
@@ -24,10 +24,10 @@
         <p>资产类别</p>
         <el-select v-model="value" placeholder="Select" style="width: 240px">
             <el-option
-            v-for="item in options"
-            :key="item.value"
+            v-for="item in dataStore.filter"
+            :key="item.label"
             :label="item.label"
-            :value="item.value"
+            :value="item.UserDepartment"
              />
             </el-select>
     </div>
@@ -67,24 +67,42 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+
+import { ref,computed  } from 'vue'
 import { useDataStore } from '/@/stores/asset';
 
 // 使用Pinia store
 const dataStore = useDataStore();
 
 const assetcode = ref(dataStore.filter.assetcode);
+const user = ref(dataStore.filter.user)
+const selectedValue = ref<string | null>(dataStore.selectedValue);
+
+const uniqueCategories = computed(() => dataStore.uniqueCategories);
+console.log(uniqueCategories);
+
+const options = computed(() => 
+  dataStore.items.map(item => ({
+    value: item.UserDepartment, // or another unique identifier
+    label: item.order
+  }))
+);
+
 
 function updateFilter() {
   dataStore.setFilter({
     assetcode: assetcode.value,
+    user: user.value,
+    UserDepartment:selectedValue.value
   });
 }
 
 function resetFilter() {
   dataStore.resetFilter();
   // 同步搜索输入框的值
-  assetcode.value = ''
+  assetcode.value = '',
+  user.value= '',
+  selectedValue.value=''
 }
 
 const input = ref('')
@@ -111,6 +129,9 @@ const shortcuts = [
     },
   },
 ]
+
+
+
 </script>
 
 <style scoped lang="scss">

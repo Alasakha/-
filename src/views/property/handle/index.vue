@@ -4,12 +4,14 @@
 <SearchContent></SearchContent>
 <TableTitle></TableTitle>
 <DiaglogVue></DiaglogVue>
+<CreateTable></CreateTable>
 
 </template>
 <script setup>
 import SearchContent from './component/Search.vue'
 import TableTitle from './component/table.vue'
 import DiaglogVue from './component/Dialog/dialog.vue'
+import CreateTable from './create/create.vue'
 </script>
 <style lang="scss" scoped>
 

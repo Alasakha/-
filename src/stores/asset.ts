@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia';
 import axios from 'axios';
 import api from '../api/assets';
+import User from '../layout/navBars/breadcrumb/user.vue';
 
 // 定义数据项的类型
 interface Item {
@@ -14,22 +15,40 @@ interface Item {
   IsRFID:boolean
   RFIDCardId:string
   StorageLocation:string
+  Purchasingdate:string
+  UserDepartment:string
+  user:string
+  StartTime:string
+  CycleTime:string
+  Supplier:string
+  ContactPerson:string
+  ContactInf:string
+  AssetStatus:string
 }
 
 // 定义筛选条件的类型
 interface Filter {
  assetcode:string
+ user:string
+ UserDepartment:string
+}
+
+interface SelectOption{
+  value: string;
+  label: string;
 }
 
 export const useDataStore = defineStore('dataStore', {
   state: () => ({
     items: [] as Item[], // 存储从后端获取的数据
     filter: {
-      assetcode:''
+      assetcode:'',
+      user:'',
+      UserDepartment:''
     } as Filter,
     isDialogVisible: false,
     selectedRow: null as Filter | null,
-    currentView: 'details' as 'details' | 'edit',
+    selectedValue: null as string | null,
   }),
 
   actions: {
@@ -43,14 +62,16 @@ export const useDataStore = defineStore('dataStore', {
         console.error('Failed to fetch data:', error);
       }
     },
+
     setFilter(newFilter: Filter) {
-    console.log('Setting filter:', newFilter);
       this.filter = {...newFilter};
-      console.log('Updated filter:', this.filter);
     },
+
     resetFilter() {
         this.filter = {
-          assetcode:''
+          assetcode:'',
+          user:'',
+          UserDepartment:'',
         };
         console.log('Filter reset:', this.filter);
       },
@@ -58,16 +79,24 @@ export const useDataStore = defineStore('dataStore', {
 
   getters: {
     filteredItems(state) {
-      const { assetcode } = state.filter;
+      const { assetcode,user,UserDepartment } = state.filter;
       console.log('当前筛选条件:', state.filter);
       return state.items.filter(item => {
         return (
           (assetcode === '' || item.assetcode.includes(assetcode)) 
-        //   (age === '' || item.age.includes(age)) &&
+           &&(user === '' || item.user.includes(user))&&(UserDepartment===''||item.UserDepartment.includes(UserDepartment))
         //   (gender === '' || item.gender === gender)
         );
       });
-    }
+    },
+    uniqueCategories(state): SelectOption[] {
+      const categories = new Set<string>();
+      state.items.forEach(item => categories.add(item.UserDepartment));
+      return Array.from(categories).map(category => ({
+        value: category,
+        label: category,
+      }));
+    },
   }
 });
 
@@ -91,7 +120,6 @@ export const useDialogStore = defineStore('dialog', {
       closeDialog() {
         this.isDialogVisible = false;
         console.log(this.isDialogVisible);
-        
       },
     },
   });
