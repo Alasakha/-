@@ -123,3 +123,20 @@ export const useDialogStore = defineStore('dialog', {
       },
     },
   });
+
+  export const  useCreateDialogStore = defineStore('createdialog',{
+    state:() => ({
+      isDialogValue : false
+    }),
+    actions:{
+      openDialog(){
+        this.isDialogValue = true
+      },
+      closeDialog(){
+        this.isDialogValue = false
+      }
+
+    }
+  }
+
+  )

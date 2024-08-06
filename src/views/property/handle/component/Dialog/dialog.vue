@@ -17,7 +17,6 @@
         <div class="specific_menu_inf_box">
             <div v-if="activeMenu=='资产信息'">
                 <DialogContent></DialogContent>
-
             </div>
             <div v-if="activeMenu=='关联工单'">
                <p>关联工单</p>

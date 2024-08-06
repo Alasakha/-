@@ -3,7 +3,7 @@
 <div class="table_title_box">
   <h1>查询结果列表</h1>
   <div class="span">
-    <el-button type="primary" style="margin-left: 0;">新增</el-button>
+    <el-button type="primary" style="margin-left: 0;" @click="openDialog">新增</el-button>
     <el-button type="primary" style="margin-left: 30px;">打印</el-button>
     <el-button type="primary" style="margin-left: 30px;">导出</el-button>
   </div>
@@ -28,7 +28,8 @@
     <el-table-column property="RFIDCardId" label="RFID卡号" width="120"/>
     <el-table-column property="StorageLocation" label="存放地点" width="120"/>
     <el-table-column property="Purchasingdate" label="购买日期" width="120"/>
-    <el-table-column property="UserDepartment" label="使用部门" width="120"/>
+    <el-table-column property="
+    " label="使用部门" width="120"/>
     <el-table-column property="user" label="使用人员" width="120"/>
     <el-table-column property="StartTime" label="维护开始时间" width="120"/>
     <el-table-column property="CycleTime" label="维护周期" width="150"/>
@@ -80,7 +81,17 @@ import { ElTable } from 'element-plus'
 import { useDataStore } from '/@/stores/asset';
 import { computed } from 'vue';
 import { useDialogStore} from '/@/stores/asset'
+import { useCreateDialogStore } from '/@/stores/asset';
 
+
+//新建功能
+const createdDialog = useCreateDialogStore()
+function openDialog(){
+  createdDialog.openDialog()
+}
+function closeDialog(){
+  createdDialog.closeDialog()
+}
 
 let state = reactive([])
 const handleSizeChange = (val: number) => {
