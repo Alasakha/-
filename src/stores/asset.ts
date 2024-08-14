@@ -2,6 +2,7 @@ import { defineStore } from 'pinia';
 import axios from 'axios';
 import api from '../api/assets';
 import User from '../layout/navBars/breadcrumb/user.vue';
+import { isEmpty } from 'lodash';
 
 // 定义数据项的类型
 interface Item {
@@ -48,7 +49,8 @@ export const useDataStore = defineStore('dataStore', {
     } as Filter,
     isDialogVisible: false,
     selectedRow: null as Filter | null,
-    selectedValue: null as string | null,
+    selectedValue:'',
+    isNull: false as boolean,
   }),
 
   actions: {
@@ -56,8 +58,6 @@ export const useDataStore = defineStore('dataStore', {
       try {
         const response = await api.getPosts(); // 替换为你的后端接口
         this.items = response.AssetsData;
-        console.log(response);
-        console.log(this.items);
       } catch (error) {
         console.error('Failed to fetch data:', error);
       }
@@ -65,6 +65,8 @@ export const useDataStore = defineStore('dataStore', {
 
     setFilter(newFilter: Filter) {
       this.filter = {...newFilter};
+      console.log(newFilter);
+      
     },
 
     resetFilter() {
@@ -75,6 +77,11 @@ export const useDataStore = defineStore('dataStore', {
         };
         console.log('Filter reset:', this.filter);
       },
+      isEmpty(){
+        if (this.filter.assetcode ==''){
+          this.isNull = true
+        }
+      }
   },
 
   getters: {

@@ -9,6 +9,9 @@
   </div>
 </div>
 
+<!-- 编辑页面 -->
+<EditContent v-model:visible="isEditDialogVisible" ></EditContent>
+
 <!-- 表格 -->
 <el-table
     ref="multipleTableRef"  
@@ -42,7 +45,7 @@
         <el-button link type="primary" size="small" @click="viewDetails(scope.row)">
           查看
         </el-button>
-        <el-button link type="primary" size="small">编辑</el-button>
+        <el-button link type="primary" size="small" @click="openEditDialog">编辑</el-button>
         <el-button link type="primary" size="small">删除</el-button>
       </template>
     </el-table-column>
@@ -82,6 +85,21 @@ import { useDataStore } from '/@/stores/asset';
 import { computed } from 'vue';
 import { useDialogStore} from '/@/stores/asset'
 import { useCreateDialogStore } from '/@/stores/asset';
+import  EditContent from './Edit/edit.vue'
+
+
+
+//编辑功能
+const isEditDialogVisible = ref(false);
+
+const openEditDialog = () =>{
+  isEditDialogVisible.value = true
+}
+
+// 切换对话框显示状态的方法
+const closeEditDialog = () => {
+  isEditDialogVisible.value = false;
+};
 
 
 //新建功能

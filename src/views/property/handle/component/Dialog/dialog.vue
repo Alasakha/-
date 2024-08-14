@@ -1,5 +1,5 @@
 <template>
-  <el-dialog  v-model="isDialogVisible" title="查看" width="1500" :before-close="closeDialog">
+  <el-dialog  v-model="isDialogVisible" title="查看" width="1500" style="height:500px"  :before-close="closeDialog">
     <div class="info_box">
       <div class="sidebar-menu">
     <ul>
@@ -70,6 +70,7 @@ const handleClose = (done: () => void) => {
 
 .info_box{
   display:flex;
+  height: 400px;
 }
 .sidebar-menu {
   width: 100px;
@@ -102,8 +103,8 @@ const handleClose = (done: () => void) => {
   border-right : #337ecc 4px solid;
 }
   .specific_menu_inf_box{
-    height: 100%;
-    background-color: aqua;
+    width: 100%;
+    height: 200px;
   }
   .el-dialog__body{
     padding: 0;
