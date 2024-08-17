@@ -1,47 +1,144 @@
 <template>
-    <el-button plain @click="dialogTableVisible = true">
-      Open a Table nested Dialog
-    </el-button>
+    <el-dialog v-model="isVisible" title="编辑" width="1300" @close="handleClose">
+      <div class="edit_title_box">
+        <span class="edit_title_content">
+          采购信息
+        </span>
+      </div>
   
-    <el-button plain @click="dialogFormVisible = true">
-      Open a Form nested Dialog
-    </el-button>
-  
-    <el-dialog v-model="isVisible" title="Shipping address" width="800" @close="handleClose">
-      <el-table :data="gridData">
-        <el-table-column property="date" label="Date" width="150" />
-        <el-table-column property="name" label="Name" width="200" />
-        <el-table-column property="address" label="Address" />
-      </el-table>
-    </el-dialog>
-  
-    <el-dialog v-model="dialogFormVisible" title="Shipping address" width="500">
-      <el-form :model="form">
-        <el-form-item label="Promotion name" :label-width="formLabelWidth">
-          <el-input v-model="form.name" autocomplete="off" />
-        </el-form-item>
-        <el-form-item label="Zones" :label-width="formLabelWidth">
-          <el-select v-model="form.region" placeholder="Please select a zone">
-            <el-option label="Zone No.1" value="shanghai" />
-            <el-option label="Zone No.2" value="beijing" />
-          </el-select>
-        </el-form-item>
-      </el-form>
-      <template #footer>
-        <div class="dialog-footer">
-          <el-button @click="dialogFormVisible = false">Cancel</el-button>
-          <el-button type="primary" @click="dialogFormVisible = false">
-            Confirm
-          </el-button>
+        <div class="edit_content_box">
+              <div class="block">
+                  <span class="title">申请编号</span>
+                  <div class="input_content">
+                      <el-input v-model="ApplicationNum" disabled placeholder="Please input" />
+                  </div>
+              </div>
+
+              <div class="block">
+                    <span class="title">申请时间</span>
+                    <div class="input_content">
+                        <el-date-picker
+                          v-model="value2"
+                          type="date"
+                          placeholder="Pick a day"
+                          :disabled-date="disabledDate"
+                          :shortcuts="shortcuts"
+                          :size="size" />
+                    </div>
+              </div>
+
+              <div class="block">
+                  <span class="title">申请编号</span>
+                  <div class="input_content">
+                      <el-input v-model="ApplicationNum" disabled placeholder="Please input" />
+                  </div>
+                </div>
+                
+
+
+              <div class="block">
+                <span class="title">所属公司</span>
+                <div class="input_content">
+                    <el-select v-model="value" class="m-2" placeholder="Select">
+                        <el-option
+                          v-for="item in options"
+                          :key="item.value"
+                          :label="item.label"
+                          :value="item.value"
+                        />  
+                    </el-select>
+                </div>     
+              </div>
+
+              <div class="block">
+                <span class="title">到货时间</span>
+                <div class="input_content">
+                    <el-select v-model="value" class="m-2" placeholder="Select">
+                        <el-option
+                          v-for="item in options"
+                          :key="item.value"
+                          :label="item.label"
+                          :value="item.value"
+                        />  
+                    </el-select>
+                </div>     
+              </div>
+
+              <div class="block">
+                    <span class="title">供应商</span>
+                    <div class="input_content">
+                        <el-date-picker
+                          v-model="value2"
+                          type="date"
+                          placeholder="Pick a day"
+                          :disabled-date="disabledDate"
+                          :shortcuts="shortcuts"
+                          :size="size" />
+                    </div>
+              </div>
+
+              <div class="block">
+                <span class="title">收货信息属部门</span>
+                <div class="input_content">
+                    <el-select v-model="value" class="m-2" placeholder="Select">
+                        <el-option
+                          v-for="item in options"
+                          :key="item.value"
+                          :label="item.label"
+                          :value="item.value"
+                        />  
+                    </el-select>
+                </div>     
+              </div>
+          
+              <div class="block">
+                  <span class="title">申请编号</span>
+                  <div class="input_content">
+                      <el-input v-model="ApplicationNum" disabled placeholder="Please input" />
+                  </div>
+              </div>
+
+              <div class="block" style="width: 1000px;">
+                  <span class="title">申请编号</span>
+                  <el-input
+                    v-model="textarea"
+                    :rows="2"
+                    type="textarea"
+                    placeholder="Please input"
+                  />
+              </div>
+          </div>
+
+        <div class="footer_box">
+            <div class="footer_button_box">
+                <el-button type="primary">提交审批</el-button>
+                <el-button type="primary">暂存</el-button>
+                <el-button type="primary" plain>取消</el-button>
+            </div>
         </div>
-      </template>
+      
+
     </el-dialog>
   </template>
   
+
+ 
+
+
+
+
+
+
+
+
   <script lang="ts" setup>
 import { reactive, ref,toRef} from 'vue'
 import { watch } from 'vue';
 import { defineProps, defineEmits } from 'vue';
+
+//申请编号
+const ApplicationNum = ref('')
+
   
 // 定义 props 接收父组件传递的对话框显示状态
 const props = defineProps({
@@ -80,26 +177,59 @@ const handleClose = () => {
     desc: '',
   })
   
-  const gridData = [
-    {
-      date: '2016-05-02',
-      name: 'John Smith',
-      address: 'No.1518,  Jinshajiang Road, Putuo District',
-    },
-    {
-      date: '2016-05-04',
-      name: 'John Smith',
-      address: 'No.1518,  Jinshajiang Road, Putuo District',
-    },
-    {
-      date: '2016-05-01',
-      name: 'John Smith',
-      address: 'No.1518,  Jinshajiang Road, Putuo District',
-    },
-    {
-      date: '2016-05-03',
-      name: 'John Smith',
-      address: 'No.1518,  Jinshajiang Road, Putuo District',
-    },
-  ]
+
   </script>
+
+<style scoped lang="scss">
+
+ .edit_title_box{
+  width: 100%;
+  margin-right: 100px;
+  display: flex;
+  align-items: center;
+  font-family: '黑体';
+  margin-bottom: 40px;
+  font-size: 20px;
+ } 
+
+.edit_title_content{
+  text-align: center;
+  font-size: 30x;
+  display: flex;
+  margin-left: 20px;
+}
+.edit_content_box{
+  justify-content: start;
+  display: flex;
+  flex-wrap: wrap;
+}
+.block{
+  justify-content: start;
+  display: flex;
+  align-items:center;
+  width: 350px;
+  margin-bottom: 20px;
+  margin-left:30px;
+  .title{
+    width:120px;
+  }
+  .input_content{
+    width: 200px;
+  }
+}
+
+.footer_box{
+  display: flex;
+  justify-content: center;
+  height:60px;
+  .footer_button_box{
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+  }
+}
+
+</style>
+
+
+

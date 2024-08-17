@@ -11,7 +11,7 @@
 
 <!-- 编辑页面 -->
 <EditContent v-model:visible="isEditDialogVisible" ></EditContent>
-
+<DeleteContent v-model:visible="isDeleteDialogVisble"></DeleteContent>
 <!-- 表格 -->
 <el-table
     ref="multipleTableRef"  
@@ -25,28 +25,27 @@
     <el-table-column property="assetname" label="资产名称" width="100" />
     <el-table-column property="specification" label="规格型号" width="100" />
     <el-table-column property="category" label="所属类别" width="100"/> 
-    <el-table-column property="unit" label="计量单位" width="100"/>
+    <el-table-column property="unit" label="计量单位" width="70"/>
     <el-table-column property="unitprice" label="资产单价" width="120"/>
-    <el-table-column property="IsRFID" label="是否配置RFID" width="150"/>
+    <el-table-column property="IsRFID" label="是否配置RFID" width="100"/>
     <el-table-column property="RFIDCardId" label="RFID卡号" width="120"/>
-    <el-table-column property="StorageLocation" label="存放地点" width="120"/>
+    <el-table-column property="StorageLocation" label="存放地点" width="100"/>
     <el-table-column property="Purchasingdate" label="购买日期" width="120"/>
-    <el-table-column property="
-    " label="使用部门" width="120"/>
-    <el-table-column property="user" label="使用人员" width="120"/>
+    <el-table-column property="UserDepartment" label="使用部门" width="90"/>
+    <el-table-column property="user" label="使用人员" width="90"/>
     <el-table-column property="StartTime" label="维护开始时间" width="120"/>
-    <el-table-column property="CycleTime" label="维护周期" width="150"/>
-    <el-table-column property="Supplier" label="供应商" width="150" />
-    <el-table-column property="ContactPerson" label="联系人员" width="150"/>
+    <el-table-column property="CycleTime" label="维护周期" width="100"/>
+    <el-table-column property="Supplier" label="供应商" width="90" />
+    <el-table-column property="ContactPerson" label="联系人员" width="100"/>
     <el-table-column property="ContactInf" label="联系方式" width="150"/>
-    <el-table-column property="AssetStatus" label="资产状态" width="150"/>
+    <el-table-column property="AssetStatus" label="资产状态" width="100"/>
     <el-table-column fixed="right" label="操作" min-width="150" >
       <template #default="scope" >
         <el-button link type="primary" size="small" @click="viewDetails(scope.row)">
           查看
         </el-button>
         <el-button link type="primary" size="small" @click="openEditDialog">编辑</el-button>
-        <el-button link type="primary" size="small">删除</el-button>
+        <el-button link type="primary" size="small" @click="viewDelete(scope.row)">删除</el-button>
       </template>
     </el-table-column>
   </el-table>
@@ -86,11 +85,12 @@ import { computed } from 'vue';
 import { useDialogStore} from '/@/stores/asset'
 import { useCreateDialogStore } from '/@/stores/asset';
 import  EditContent from './Edit/edit.vue'
-
+import DeleteContent from './Delete/delete.vue'
 
 
 //编辑功能
 const isEditDialogVisible = ref(false);
+
 
 const openEditDialog = () =>{
   isEditDialogVisible.value = true
@@ -101,15 +101,14 @@ const closeEditDialog = () => {
   isEditDialogVisible.value = false;
 };
 
+//删除功能
+const isDeleteDialogVisble = ref(false)
+
 
 //新建功能
 const createdDialog = useCreateDialogStore()
-function openDialog(){
-  createdDialog.openDialog()
-}
-function closeDialog(){
-  createdDialog.closeDialog()
-}
+
+
 
 let state = reactive([])
 const handleSizeChange = (val: number) => {
@@ -130,8 +129,12 @@ const disabled = ref(false)
 //查看功能
 const dialogStore = useDialogStore();
 
+function viewDelete(row :any) {
+  dialogStore.openDelete(row);
+  isDeleteDialogVisble.value = true
+}
+
 function viewDetails(row :any) {
-  console.log(row);
   dialogStore.openDialog(row);
 }
 

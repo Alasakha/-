@@ -100,29 +100,14 @@ export const demoRoutes:Array<RouteRecordRaw> = [
 					icon: 'iconfont icon-diannao',
 				},
 			},
-				// 领用&退库
+			// '/@/views/property/AssetTags/index.vue'
+				// 资产标签
 				{
-					path: '/property/recpAreturn',
-					name: 'recpAreturn',
-					component:() =>import('/@/views/property/recpAreturn/index.vue'),
+					path: '/property/AssetTags',
+					name: 'AssetTags',
+					component:() =>import('/@/views/property/AssetTags/index.vue'),
 					meta: {
-						title: '领用&退库',
-						isLink: '',
-						isHide: false,
-						isKeepAlive: true,
-						isAffix: false,
-						isIframe: false,
-						roles: ['admin'],
-						icon: 'iconfont icon-diannao',
-					},
-			    },
-				{
-					//借用&归还
-					path: '/property/loadAreturn',
-					name: 'Loan & return',
-					component:() =>import('/@/views/property/loadAreturn/index.vue'),
-					meta: {
-						title: '借用&归还',
+						title: '资产标签',
 						isLink: '',
 						isHide: false,
 						isKeepAlive: true,

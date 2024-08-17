@@ -65,8 +65,6 @@ export const useDataStore = defineStore('dataStore', {
 
     setFilter(newFilter: Filter) {
       this.filter = {...newFilter};
-      console.log(newFilter);
-      
     },
 
     resetFilter() {
@@ -87,7 +85,6 @@ export const useDataStore = defineStore('dataStore', {
   getters: {
     filteredItems(state) {
       const { assetcode,user,UserDepartment } = state.filter;
-      console.log('当前筛选条件:', state.filter);
       return state.items.filter(item => {
         return (
           (assetcode === '' || item.assetcode.includes(assetcode)) 
@@ -111,22 +108,20 @@ export const useDialogStore = defineStore('dialog', {
     state: () => ({
       isDialogVisible: false,
       selectedRow: null as any | null,
-      currentView: 'details' as 'details' | 'edit',
     }),
     actions: {
       openDialog(row: any) {
         this.selectedRow = row;
-        this.currentView = 'details'; // 默认视图类型
+        console.log('selectRow是',this.selectedRow);
         this.isDialogVisible = true;
-        console.log(this.isDialogVisible);
-        
       },
-      switchView(view: 'details' | 'edit') {
-        this.currentView = view;
+      openDelete(row:any){
+        console.log('row是',row);
+        this.selectedRow = row
+        console.log('选中了：',this.selectedRow.assetcode);
       },
       closeDialog() {
         this.isDialogVisible = false;
-        console.log(this.isDialogVisible);
       },
     },
   });
